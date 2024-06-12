@@ -11,16 +11,12 @@ def menu():
     print("6.- Estadísticas")
     print("0.- Salir")
 def producto():
-    try:
-        ID=input("Ingrese ID del producto: ")
-        nombre=input("Ingrese nombre del producto: ")
-        precio=int(input("Ingrese precio del producto: "))
-        productos=[ID,nombre,precio]
-        lista.append(productos)
-        print("PRODUCTO AGREGADO CORRECTAMENTE!")
-    except:
-        print("INGRESE DATOS VÁLIDOS")
-        print("=PRODUCTO NO GUARDADO=")
+    ID=input("Ingrese ID del producto: ")
+    nombre=input("Ingrese nombre del producto: ")
+    precio=int(input("Ingrese precio del producto: "))
+    productos=[ID,nombre,precio]
+    lista.append(productos)
+    print("PRODUCTO AGREGADO CORRECTAMENTE!")
 def listar():
     for x in lista:
         print("ID:",x[0]," Nombre:",x[1]," Precio:",x[2])
