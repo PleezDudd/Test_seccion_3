@@ -1,0 +1,123 @@
+import csv
+lista=[]
+def validar(efectividad):
+    if efectividad>=0 and efectividad<=100:
+        print("Porcentaje agregador correctamente")
+    else:
+        print("Debe ingresar un numero válido...")
+        efectividad=int(input("Ingrese porcentaje de efectividad(0-100): "))
+def cate(efectividad):
+    if efectividad>=0 and efectividad<=25:
+        categoria=("Chiste")
+    elif efectividad>=26 and efectividad<=50:
+        categoria="Anécdota"
+    elif efectividad>=51 and efectividad<=75:
+        categoria="Peligro"
+    elif efectividad>=76 and efectividad<=99:
+        categoria="Atención"
+    elif efectividad==100:
+        categoria="Esclavitud"
+    return categoria
+def listar():
+    for x in lista:
+        print("ID:",x[0]," Nombre:",x[1]," Efectividad:",x[2]," Categoria:",x[3])
+def eliminar():
+    
+    eliminar=int(input("Ingrese ID de plan a eliminar: "))
+    for x in lista:
+        IDd=int(x[0])
+        if eliminar==IDd:
+            print("Plan encontrado!")
+            pregunta=input("Esta seguro que desea eliminar el plan(si/no): ").lower()
+            if pregunta=="si" or pregunta=="s":
+                lista.remove(x)
+                print("Plan eliminador correctamente!")
+            else:
+                print("Plan NO eliminado")
+def generar():
+    with open("Planes.csv","w",newline="")as archivo:
+        escribircsv=csv.writer(archivo)
+        escribircsv.writerow(["ID","Nombre","Efectividad","Categoria"])
+        escribircsv.writerows(lista)
+        print("Archivo guardado correctamente")
+def cargar():
+    lista.clear()
+    with open("Planes.csv","r",newline="")as archivo:
+        leercsv=csv.reader(archivo)
+        for x in leercsv:
+            lista.append(x)
+    lista.pop(0)
+    print("Datos cargados correctamente\n")
+    for x in lista:
+        print("ID:",x[0]," Nombre:",x[1]," Efectividad:",x[2]," Categoria:",x[3])
+def prom():
+    total=0
+    mayor=0
+    for x in lista:
+        efec=int(x[2])
+        total=total+efec
+        if efec>mayor:
+            mayor=efec
+    cantidad=len(lista)
+    promedio=total/cantidad
+def may():
+    mayor=0
+    for x in lista:
+        efec=int(x[2])
+        if efec>mayor:
+            mayor=efec
+    return(mayor)
+def prom():
+    total=0
+    for x in lista:
+        efec=int(x[2])
+        total=total+efec
+    cantidad=len(lista)
+    promedio=total/cantidad
+    return(promedio)
+while True:
+    print("===================")
+    print("======M E N Ú======")
+    print("1.-Agregar plan")
+    print("2.-Listar planes")
+    print("3.-Eliminar plan por ID")
+    print("4.-Generar CSV")
+    print("5.-Cargar CSV")
+    print("6.-Estadisticas")
+    print("0.-Salir")
+    op=int(input("Seleccione una opción: "))
+    if op==1:
+        print("===AGREGAR PLAN===")
+        ID=int(input("Ingrese ID del plan: "))
+        nombre=input("Ingrese nombre: ")
+        efectividad=int(input("Ingrese porcentaje de efectividad(0-100): "))
+        validar(efectividad)
+        cate(efectividad)
+        categoria=cate(efectividad)
+        plan=[ID,nombre,efectividad,categoria]
+        lista.append(plan)
+    elif op==2:
+        print("===LISTA PLANES===")
+        listar()
+    elif op==3:
+        print("===ELIMINAR PLAN POR ID===")
+        eliminar()
+    elif op==4:
+        print("===GENERAR CSV===")
+        generar()
+    elif op==5:
+        print("===CARGAR CSV===")
+        cargar()
+    elif op==6:
+        print("===ESTADISTICAS===")
+        prom(xx)
+        may()
+        promedio=prom()
+        mayor=may()
+        print("Porcentaje de efectividad promedio: ",promedio,"%")
+        print("Valor del porcentaje de efectividad más alto: ",mayor)
+    elif op==0:
+        print("Gracias por usar esta plataforma!")
+        break
+    else:
+        print("INGRESE UNA OPCION VALIDA")
